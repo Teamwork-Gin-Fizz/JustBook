@@ -4,7 +4,8 @@
 	require.config({
 		path:{
 			'jQuery': 'libs/jquery',
-			'Sammy': 'libs/sammy'
+			'Sammy': 'libs/sammy',
+			'bootstrap':'libs/bootstrap'
 		}
 	});
 	
