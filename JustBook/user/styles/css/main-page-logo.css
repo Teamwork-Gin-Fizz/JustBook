@@ -1,0 +1,50 @@
+@font-face {
+    font-family: logo;
+    src: url('../fonts/KeepCalm-Medium.ttf');
+}
+
+#logo-container {
+    text-align: center;
+}
+
+#container-first-word {
+    width: 88px;
+    height: 65px;
+    background-color: #007ACC;
+    border-top-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    display: inline-block;
+}
+
+#container-second-word {
+    height: 54px;
+    display: inline-block;
+}
+
+#first-part-of-word {
+    font-family: logo;
+    font-size: 67px;
+    font-weight: bold;
+    margin-left: 2px;
+    line-height: 100%;
+    position: relative;
+    border-top-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    top: 5px;
+    left: -1px;
+    color: white;
+}
+
+#second-part-of-word {
+    font-family: logo;
+    font-size: 67px;
+    font-weight: bold;
+    color: #007ACC;
+    position: relative;
+    top: 5px;
+    display: inline-block;
+}
+
+.row {
+    height: 100px;
+}
