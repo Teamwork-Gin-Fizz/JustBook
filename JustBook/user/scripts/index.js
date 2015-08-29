@@ -12,6 +12,8 @@
 	
 	// Starting the app - to be implemented
 	requirejs(['jquery'], function($){
-		$('#template').html('sdfdfb');
+		var $templte = $('#template');
+
+		$templte.load('templates/main-page-template.html');
 	});
 } ());
