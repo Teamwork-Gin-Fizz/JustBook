@@ -1,16 +1,17 @@
 (function () {
 	'use strict';
 	
-	require.config({
+	requirejs.config({
+		baseUrl: 'scripts/libs',
 		path:{
-			'jQuery': 'libs/jquery',
-			'Sammy': 'libs/sammy',
-			'bootstrap':'libs/bootstrap'
+			'jquery': 'jquery',
+			'Sammy': 'sammy',
+			'bootstrap':'bootstrap'
 		}
 	});
 	
 	// Starting the app - to be implemented
-	require([], function(){
-		
+	requirejs(['jquery'], function($){
+		$('#template').html('sdfdfb');
 	});
 } ());
