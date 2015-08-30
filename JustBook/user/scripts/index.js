@@ -11,9 +11,7 @@
 	});
 	
 	// Starting the app - to be implemented
-	requirejs(['jquery'], function($){
-		var $templte = $('#template');
-
-		$templte.load('templates/main-page-template.html');
+	requirejs(['../template-loader'], function(templateLoader){
+		templateLoader.loadMainPage();
 	});
 } ());
