@@ -5,6 +5,17 @@ define(['jquery'], function ($) {
 
     $template.on('click', '#login-button', loginLogic);
 
+    if (sessionStorage.getItem('userHash') != '') {
+        LoadMain();
+    }
+
+    function LoadMain() {
+        requirejs(['../template-loader'], function (templateLoader) {
+            templateLoader.loadCustonPage('templates/main-page-home.html');
+        });
+        requirejs(['../home']);
+    };
+
     function loginLogic() {
         var chosenUsername = $('#sign-in-username').val(),
             chosenPassword = $('#sign-in-password').val();
@@ -22,12 +33,10 @@ define(['jquery'], function ($) {
                 if (res.answer == 'correct') {
                     sessionStorage.setItem('userHash', res.hash);
                     sessionStorage.setItem('username', chosenUsername);
-                    requirejs(['../template-loader'], function (templateLoader) {
-                        templateLoader.loadCustonPage('templates/main-page-home.html');
-                    });
-                    requirejs(['../home']);
+                    LoadMain();
                 }
             });
         }
+
     }
 });

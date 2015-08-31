@@ -24,7 +24,7 @@ define(['jquery'], function ($) {
                 '&gender=' + gender +
                 '&birthdate=' + birthDate,
                 function (res) {
-                    if (res.answer == 'success') {
+                    if (res.answer === 'correct') {
                         requirejs(['../inner-template-loader'], function (templateLoader) {
                             templateLoader.loadTemplate('#inner-window', 'templates/signup-page-result-success.html');
                         });
@@ -34,7 +34,7 @@ define(['jquery'], function ($) {
                         });
                     }
                     clearForm();
-                    console.log(res);
+                    console.log(res.answer);
                 });
         }
 
