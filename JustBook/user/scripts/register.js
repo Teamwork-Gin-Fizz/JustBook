@@ -1,7 +1,6 @@
-define(['jquery'], function ($) {
+define(['jquery', '../scripts/constants'], function ($, constants) {
 
-    var $template = $('#template'),
-        serverIP = 'http://78.90.130.123/server.php';
+    var $template = $('#template');
 
     $template.on('click', '#register-button', registerLogic);
 
@@ -15,7 +14,7 @@ define(['jquery'], function ($) {
             
         // TODO: If nevalid data -> display errors    
         if (chosenUsername != '' && chosenPassword != '') {
-            $.getJSON(serverIP + '?callback=?',
+            $.getJSON(constants.serverAddress + '?callback=?',
                 'action=' + 'register' +
                 '&name=' + chosenUsername +
                 '&password=' + chosenPassword +

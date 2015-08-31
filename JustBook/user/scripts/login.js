@@ -1,11 +1,10 @@
-define(['jquery'], function ($) {
+define(['jquery', '../scripts/constants'], function ($, constants) {
 
-    var $template = $('#template'),
-        serverIP = 'http://78.90.130.123/server.php';
+    var $template = $('#template');
 
     $template.on('click', '#login-button', loginLogic);
 
-    if (sessionStorage.getItem('userHash') != '') {
+    if (typeof(sessionStorage.getItem('userHash')) ==='string' && sessionStorage.getItem('userHash') != '') {
         LoadMain();
     }
 
@@ -22,7 +21,7 @@ define(['jquery'], function ($) {
             
         // TODO: If nevalid data -> display errors    
         if (chosenUsername != '' && chosenPassword != '') {
-            $.getJSON(serverIP + '?callback=?', 'action=' + 'login&name=' + chosenUsername + '&password=' + chosenPassword, function (res) {
+            $.getJSON(constants.serverAddress + '?callback=?', 'action=' + 'login&name=' + chosenUsername + '&password=' + chosenPassword, function (res) {
                 /*
                 Server returns:
                 Object { answer: "incorrect", reason: "username" } //when username is not in DB
