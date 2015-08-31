@@ -1,8 +1,8 @@
 define(['jquery'], function ($) {
 
     var $template = $('#template'),
-        serverIP = 'http://localhost/telerik/server/server.php';
-        
+        serverIP = 'http://78.90.130.123/server.php';
+
     $template.on('click', '#login-button', loginLogic);
 
     function loginLogic() {
@@ -18,10 +18,12 @@ define(['jquery'], function ($) {
                 Object { answer: "incorrect", reason: "password" } //when password is not that one from DB
                 Object { answer: "correct", hash: "12345678" } //when everything is OK
                 */
+                console.log(res);
                 if (res.answer == 'correct') {
                     sessionStorage.setItem('userHash', res.hash);
+                    sessionStorage.setItem('username', chosenUsername);
                     requirejs(['../template-loader'], function (templateLoader) {
-                        templateLoader.loadMainPage();
+                        templateLoader.loadCustonPage('templates/main-page-home.html');
                     });
                 }
             });
