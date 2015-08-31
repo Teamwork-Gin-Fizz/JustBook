@@ -24,6 +24,9 @@ define(['jquery'], function($){
         },
         loadSignUpPage: function () {
             $template.load('templates/main-page-signup-template.html');
+        },
+        loadCustonPage: function (path){
+            $template.load(path);
         }
     };
 });
