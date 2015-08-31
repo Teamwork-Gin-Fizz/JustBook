@@ -14,4 +14,9 @@
 	requirejs(['../template-loader'], function(templateLoader){
 		templateLoader.loadMainPage();
 	});
+	
+	requirejs(['../login']);
+	
+	requirejs(['../register']);
+	
 } ());
