@@ -13,6 +13,7 @@ define(['jquery'], function ($) {
 			templateLoader.loadTemplate('#inner-content', 'templates/chat-main-page.html');
 		});
 		requirejs(['../chat-logic']);
+		$('#go-to-chat').hide();
 	};
 	
 	function Logout(){
