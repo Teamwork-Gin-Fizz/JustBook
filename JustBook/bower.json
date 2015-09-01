@@ -1,0 +1,19 @@
+{
+  "name": "JustBook",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Teamwork-Gin-Fizz/JustBook",
+  "authors": [
+    "MarinMarinov <marin.telerik@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mocha": "~2.3.0"
+  }
+}
