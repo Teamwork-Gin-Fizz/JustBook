@@ -65,7 +65,7 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 				var allData = res.messages.split(".//-||/.");
 				$.each(allData, function (index, value) {
 					if (value !== '') {
-						theHtml += "<div class='col-md-12'>";
+						theHtml += "<div class='col-md-12' id='message-container'>";
 						theHtml += value;
 						theHtml += '</div>';
 					}
