@@ -4,6 +4,9 @@ define(['jquery'], function ($) {
 		$template = $('#template');
 
 	$('#username').html(sessionStorage.getItem('username'));
+    //var $username = $('#username');
+	//console.log($username.html());
+	//$('#username').html('Baba Jaga');
 
 	$template.on('click', '#go-to-chat', ChatLoadLogic);
 	$template.on('click', '#go-to-logout', Logout);

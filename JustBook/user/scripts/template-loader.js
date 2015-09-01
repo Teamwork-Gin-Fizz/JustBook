@@ -19,8 +19,8 @@ define(['jquery'], function($){
 
     return {
         loadMainPage: loadMainPage,
-        loadSignInPage: loadSignInPage,
-        loadSignUpPage: loadSignUpPage,
+        loadSignInPage: loadSignUpPage,
+        loadSignUpPage: loadSignInPage,
         loadCustomPage: loadCustomPage
     };
 });
