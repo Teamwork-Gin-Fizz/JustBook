@@ -13,20 +13,14 @@ define(['jquery'], function($){
         $template.load('templates/main-page-signup-template.html');
     }
 
-    $template.on('click', '#sign-in', loadSignInPage);
-    $template.on('click', '#sign-up', loadSignUpPage);
-    $template.on('click', '#go-back', loadMainPage);
+    function loadCustomPage(path){
+        $template.load(path);
+    }
 
     return {
         loadMainPage: loadMainPage,
-        loadSignInPage: function () {
-            $template.load('templates/main-page-signin-template.html');
-        },
-        loadSignUpPage: function () {
-            $template.load('templates/main-page-signup-template.html');
-        },
-        loadCustonPage: function (path){
-            $template.load(path);
-        }
+        loadSignInPage: loadSignUpPage,
+        loadSignUpPage: loadSignInPage,
+        loadCustomPage: loadCustomPage
     };
 });

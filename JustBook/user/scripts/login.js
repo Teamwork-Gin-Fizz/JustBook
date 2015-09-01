@@ -6,14 +6,26 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 
     if (typeof(sessionStorage.getItem('userHash')) ==='string' && sessionStorage.getItem('userHash') != '') {
         LoadMain();
+    }else{
+        console.log('IF statement of sessionStorage item validation in login.js is not satisfied'); //TODO: Want to see if this is possible!
     }
 
     function LoadMain() {
-        requirejs(['../template-loader'], function (templateLoader) {
-            templateLoader.loadCustonPage('templates/main-page-home.html');
-        });
-        requirejs(['../home']);
-    };
+
+        function first(){
+            requirejs(['../template-loader'], function (templateLoader) {
+                templateLoader.loadCustomPage('templates/main-page-home.html');
+            });
+        }
+
+        function second(){
+            requirejs(['../home']);
+
+        }
+
+        first();
+        setTimeout(second, 500); // TODO: Yes, it is funny, but you can try to find better solution :)
+    }
 
     function loginLogic() {
         var chosenUsername = $('#sign-in-username').val(),
@@ -38,7 +50,6 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
                         $('#error-message').html('Incorrect username!').css('text-align', 'center').css('font-weight', 'bold').css('color', 'red').fadeOut(3000);
                     }
                     if(res.reason == 'password'){ //TODO: need some good styling :)
-                        console.log('Lujesh ma s parolata');
                         $('#error-message').html('Incorrect password!').css('text-align', 'center').css('font-weight', 'bold').css('color', 'red').fadeOut(3000);
                     }
                 }
