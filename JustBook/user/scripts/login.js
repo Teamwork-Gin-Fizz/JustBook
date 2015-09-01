@@ -21,7 +21,7 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
             
         // TODO: If nevalid data -> display errors    
         if (chosenUsername != '' && chosenPassword != '') {
-            $.getJSON(constants.serverAddress + '?callback=?', 'action=' + 'login&name=' + chosenUsername + '&password=' + chosenPassword, function (res) {
+            $.getJSON(constants.serverAddress + '?callback=?', 'action=' + 'login&name=' + chosenUsername + '&password=' + chosenPassword, function (res) { // TODO: need explanation!
                 /*
                 Server returns:
                 Object { answer: "incorrect", reason: "username" } //when username is not in DB
@@ -33,6 +33,14 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
                     sessionStorage.setItem('userHash', res.hash);
                     sessionStorage.setItem('username', chosenUsername);
                     LoadMain();
+                }else{
+                    if(res.reason == 'username'){ //TODO: need some good styling :)
+                        $('#error-message').html('Incorrect username!').css('text-align', 'center').css('font-weight', 'bold').css('color', 'red').fadeOut(3000);
+                    }
+                    if(res.reason == 'password'){ //TODO: need some good styling :)
+                        console.log('Lujesh ma s parolata');
+                        $('#error-message').html('Incorrect password!').css('text-align', 'center').css('font-weight', 'bold').css('color', 'red').fadeOut(3000);
+                    }
                 }
             });
         }
