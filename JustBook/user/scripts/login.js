@@ -10,7 +10,7 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 
     function LoadMain() {
         requirejs(['../template-loader'], function (templateLoader) {
-            templateLoader.loadCustonPage('templates/main-page-home.html');
+            templateLoader.loadCustomPage('templates/main-page-home.html');
         });
         requirejs(['../home']);
     };
