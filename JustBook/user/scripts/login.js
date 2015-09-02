@@ -4,13 +4,36 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 
     $template.on('click', '#login-button', loginLogic);
 
-    if (typeof(sessionStorage.getItem('userHash')) ==='string' && sessionStorage.getItem('userHash') != '') {
+    if (typeof(sessionStorage.getItem('userHash')) === 'string' && sessionStorage.getItem('userHash') != '') {
         LoadMain();
-    }else{
+    } else {
         console.log('IF statement of sessionStorage item validation in login.js is not satisfied'); //TODO: Want to see if this is possible!
     }
 
     function LoadMain() {
+//<<<<<<< HEAD
+        requirejs(['../template-loader'], function (templateLoader) {
+            templateLoader.loadCustomPage('templates/main-page-home.html');
+        });
+        requirejs(['../home']);
+    };
+//=======
+//
+//        function first(){
+//            requirejs(['../template-loader'], function (templateLoader) {
+//                templateLoader.loadCustomPage('templates/main-page-home.html');
+//            });
+//        }
+//
+//        function second(){
+//            requirejs(['../home']);
+//
+//        }
+//
+//        first();
+//        setTimeout(second, 500); // TODO: Yes, it is funny, but you can try to find better solution :)
+//    }
+//>>>>>>> 37e902ff66897adcbe881c455467a5740fa1898b
 
         function first(){
             requirejs(['../template-loader'], function (templateLoader) {
@@ -28,26 +51,26 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
     function loginLogic() {
         var chosenUsername = $('#sign-in-username').val(),
             chosenPassword = $('#sign-in-password').val();
-            
+
         // TODO: If nevalid data -> display errors    
         if (chosenUsername != '' && chosenPassword != '') {
             $.getJSON(constants.serverAddress + '?callback=?', 'action=' + 'login&name=' + chosenUsername + '&password=' + chosenPassword, function (res) { // TODO: need explanation!
                 /*
-                Server returns:
-                Object { answer: "incorrect", reason: "username" } //when username is not in DB
-                Object { answer: "incorrect", reason: "password" } //when password is not that one from DB
-                Object { answer: "correct", hash: "12345678" } //when everything is OK
-                */
+                 Server returns:
+                 Object { answer: "incorrect", reason: "username" } //when username is not in DB
+                 Object { answer: "incorrect", reason: "password" } //when password is not that one from DB
+                 Object { answer: "correct", hash: "12345678" } //when everything is OK
+                 */
                 console.log(res);
                 if (res.answer == 'correct') {
                     sessionStorage.setItem('userHash', res.hash);
                     sessionStorage.setItem('username', chosenUsername);
                     LoadMain();
-                }else{
-                    if(res.reason == 'username'){ //TODO: need some good styling :)
+                } else {
+                    if (res.reason == 'username') { //TODO: need some good styling :)
                         $('#error-message').html('Incorrect username!').css('text-align', 'center').css('font-weight', 'bold').css('color', 'red').fadeOut(3000);
                     }
-                    if(res.reason == 'password'){ //TODO: need some good styling :)
+                    if (res.reason == 'password') { //TODO: need some good styling :)
                         $('#error-message').html('Incorrect password!').css('text-align', 'center').css('font-weight', 'bold').css('color', 'red').fadeOut(3000);
                     }
                 }
