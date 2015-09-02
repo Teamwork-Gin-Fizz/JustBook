@@ -1,4 +1,4 @@
-define(['jquery', '../scripts/constants'], function ($, constants) {
+require(['jquery', 'user/scripts/constants'], function ($, constants) {
 
     var $template = $('#template');
 
@@ -24,11 +24,11 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
                 '&birthdate=' + birthDate,
                 function (res) {
                     if (res.answer === 'correct') {
-                        requirejs(['../inner-template-loader'], function (templateLoader) {
+                        require(['user/scripts/inner-template-loader'], function (templateLoader) {
                             templateLoader.loadTemplate('#inner-window', 'templates/signup-page-result-success.html');
                         });
                     } else {
-                        requirejs(['../inner-template-loader'], function (templateLoader) {
+                        require(['user/scripts/inner-template-loader'], function (templateLoader) {
                             templateLoader.loadTemplate('#inner-window', 'templates/signup-page-result-fail.html');
                         });
                     }

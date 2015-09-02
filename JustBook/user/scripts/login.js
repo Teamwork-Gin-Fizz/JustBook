@@ -1,4 +1,4 @@
-define(['jquery', '../scripts/constants'], function ($, constants) {
+require(['jquery', 'user/scripts/constants'], function ($, constants) {
 
     var $template = $('#template');
 
@@ -13,13 +13,13 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
     function LoadMain() {
 
         function first(){
-            requirejs(['../template-loader'], function (templateLoader) {
+            require(['user/scripts/template-loader'], function (templateLoader) {
                 templateLoader.loadCustomPage('templates/main-page-home.html', second);
             });
         }
 
         function second(){
-            requirejs(['../home']);
+            require(['user/scripts/home']);
         }
 
         first();

@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Running tests with Mocha, asserting with Chai</title>
-    <link rel="stylesheet" href="../../../bower_components/mocha/mocha.css">
+    <link rel="stylesheet" href="../../jspm_packages/npm/mocha@2.3.0/mocha.css">
 </head>
 <body>
     <div id="mocha"></div>
-    <script src="../../scripts/libs/require.js" data-main="refreshChatBox.tests"></script>
+
+
+    <script src="../../jspm_packages/system.js"></script>
+    <script src="../../config.js"></script>
+    <script>
+        System.import('user/scripts/tests/refreshChatBox.tests.js');
+    </script>
+
+
+    <!--<script src="../../scripts/libs/require.js" data-main="refreshChatBox.tests"></script>-->
     <!--<script src="../../scripts/libs/require.js"></script>-->
-    <script src="../../../bower_components/mocha/mocha.js"></script>
-    <script src="../../../bower_components/chai/chai.js"></script>
+    <!--<script src="../../../bower_components/mocha/mocha.js"></script>-->
+    <!--<script src="../../../bower_components/chai/chai.js"></script>-->
     <script type="text/javascript">
         mocha.setup('bdd');
         //require(['chai']);
