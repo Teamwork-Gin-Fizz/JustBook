@@ -1,48 +1,42 @@
 (function () {
-	'use strict';
-	
-	requirejs.config({
-		baseUrl: 'scripts/libs',
-		path:{
-			'jquery': 'jquery',
-			'sammy': 'sammy',
-			'bootstrap':'bootstrap'
-		}
-	});
+    'use strict';
 
-	requirejs(['jquery', 'sammy', '../inner-template-loader'], function ($, sammy, templateLoader) {
-		var app = sammy('#template', function () {  //TODO: What '#template' does really do?
-			this.get('#/', function () {
-				templateLoader.loadTemplate('#template', 'templates/main-page-template.html');
-			});
+    window.define = System.amdDefine;
+    window.require = System.amdRequire;
 
-			this.get('#/sign-in', function () {
-				templateLoader.loadTemplate('#template', 'templates/main-page-signin-template.html');
-			});
+    // Sammy depends on jQuery.
+    // Sammy does not return a function object with SystemJS, but it does creates a global function object.
+    System.import('jquery').then(function () {
+        System.import('sammy').then(function () {
+            System.import('user/scripts/inner-template-loader').then(function (templateLoader) {
+                var app = window.Sammy('#template', function () {  //TODO: What '#template' does really do?
+                    this.get('#/', function () {
+                        templateLoader.loadTemplate('#template', 'templates/main-page-template.html');
+                    });
 
-			this.get('#/sign-up', function () {
-				templateLoader.loadTemplate('#template', 'templates/main-page-signup-template.html');
-			});
+                    this.get('#/sign-in', function () {
+                        templateLoader.loadTemplate('#template', 'templates/main-page-signin-template.html');
+                    });
 
-			this.get('#/home', function () {
+                    this.get('#/sign-up', function () {
+                        templateLoader.loadTemplate('#template', 'templates/main-page-signup-template.html');
+                    });
 
-			});
+                    this.get('#/home', function () {
 
-			this.get('#/home/chat', function () {
+                    });
 
-			});
-		});
+                    this.get('#/home/chat', function () {
 
-		app.run('#/');
-	});
+                    });
+                });
 
-	// Starting the app - to be implemented
-	//requirejs(['../template-loader'], function(templateLoader){
-	//	templateLoader.loadMainPage();
-	//});
-	
-	requirejs(['../login']);
-	
-	requirejs(['../register']);
-	
-} ());
+                app.run('#/');
+            });
+        });
+    });
+
+    require(['user/scripts/login']);
+
+    require(['user/scripts/register']);
+}());

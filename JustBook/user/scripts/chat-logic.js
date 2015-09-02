@@ -1,4 +1,4 @@
-define(['jquery', '../scripts/constants'], function ($, constants) {
+require(['jquery', 'user/scripts/constants'], function ($, constants) {
     console.log('I am in chat-logic.js');
 	var username = sessionStorage.getItem('username'),
 		userhash = sessionStorage.getItem('userHash'),
@@ -28,7 +28,7 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 	$template.on('change', 'select', function () {
 		correspondent = $("select option:selected").text();
 		//sessionStorage.setItem('correspondent', correspondent);
-		requirejs(['../inner-template-loader'], function (templateLoader) {
+		require(['user/scripts/inner-template-loader'], function (templateLoader) {
 			templateLoader.loadTemplate('#chat-window', 'templates/chat-selected-user.html');
 		});
 	});

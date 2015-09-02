@@ -19,7 +19,12 @@
     });
 }());*/
 
-define(['../chat-logic'], function (chatLogic) {
+// I guess mocha and chai should be required here for the tests
+
+window.define = System.amdDefine;
+window.require = System.amdRequire;
+
+require(['user/scripts/chat-logic'], function (chatLogic) {
     console.log('I am in define of the tests');
 
     describe('#refreshChatBox function test suit', function () {
