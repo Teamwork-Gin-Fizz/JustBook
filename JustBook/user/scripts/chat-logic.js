@@ -10,7 +10,10 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 			$('#users-for-chat')
 						.append($("<option></option>")
 							.text('Choose'));
+            //var listOfUsers = res.list;
+            //console.log(listOfUsers);
 			var allUsers = res.list.split(',');
+            //console.log(allUsers);
 			$.each(allUsers, function (key, value) {
 				if (value !== '' && value != username) {
 					$('#users-for-chat')
@@ -61,23 +64,34 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 			'&to=' + correspondent +
 			'&hash=' + userhash,
 			function (res) {
-
-				var allData = res.messages.split(".//-||/.");
-				$.each(allData, function (index, value) {
-					if (value !== '') {
-						theHtml += "<div class='col-md-12'>";
-						theHtml += value;
-						theHtml += '</div>';
-					}
-				})
-				$('#chatZone').html(theHtml);		
+                if(res.answer == 'incorrect'){ // TODO: Answer to be incorrect is the common case
+                    console.log('refreshChatBox() returns res.answer "incorrect"'); //TODO: We can remove this logger to not log anything in the console
+                }else{
+                    var allData = res.messages.split(".//-||/.");
+                    $.each(allData, function (index, value) {
+                        if (value !== '') {
+                            theHtml += "<div class='col-md-12'>";
+                            theHtml += value;
+                            theHtml += '</div>';
+                        }
+                    });
+                    $('#chatZone').html(theHtml);
+                }
 			});
 	}
 	setInterval(refreshChatBox, 1000);
+
 	function refreshScroll(){
-	$('#chatZone').scrollTop($('#chatZone')[0].scrollHeight);
+        var $chatZone = $('#chatZone');
+        if($chatZone.length != 0){
+            $chatZone.scrollTop($chatZone[0].scrollHeight);
+        }
+        else{
+            console.log('refreshScroll() returns this message because chatZone does not contain anything! Type something!');
+        }
 	}
+
 	if($('#chatZone')){
-	setInterval(refreshScroll, 3000);
+	    setInterval(refreshScroll, 3000);
 	}
 });
