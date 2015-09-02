@@ -8,9 +8,9 @@
 }
 
 #container-first-word {
-    width: 88px;
+    width: auto;
     height: 65px;
-    background-color: #007ACC;
+    background-color: #72DB67;
     border-top-left-radius: 13px;
     border-bottom-right-radius: 13px;
     display: inline-block;
@@ -39,7 +39,7 @@
     font-family: logo;
     font-size: 67px;
     font-weight: bold;
-    color: #007ACC;
+    color: #72DB67;
     position: relative;
     top: 5px;
     display: inline-block;

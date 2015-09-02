@@ -1,0 +1,13 @@
+#choose-user-label {
+    border-top-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    background-color: #72DB67;
+    font-family: sans-serif;
+    font-size: 25px;
+}
+
+select {
+    border: 1px solid #CCCCCC;
+    border-radius: 13px;
+    outline: none;
+}
