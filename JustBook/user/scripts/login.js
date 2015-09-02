@@ -14,17 +14,15 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 
         function first(){
             requirejs(['../template-loader'], function (templateLoader) {
-                templateLoader.loadCustomPage('templates/main-page-home.html');
+                templateLoader.loadCustomPage('templates/main-page-home.html', second);
             });
         }
 
         function second(){
             requirejs(['../home']);
-
         }
 
         first();
-        setTimeout(second, 500); // TODO: Yes, it is funny, but you can try to find better solution :)
     }
 
     function loginLogic() {
@@ -55,6 +53,5 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
                 }
             });
         }
-
     }
 });

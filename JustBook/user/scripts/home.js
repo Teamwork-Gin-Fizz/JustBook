@@ -4,9 +4,6 @@ define(['jquery'], function ($) {
 		$template = $('#template');
 
 	$('#username').html(sessionStorage.getItem('username'));
-    //var $username = $('#username');
-	//console.log($username.html());
-	//$('#username').html('Baba Jaga');
 
 	$template.on('click', '#go-to-chat', ChatLoadLogic);
 	$template.on('click', '#go-to-logout', Logout);
@@ -19,7 +16,7 @@ define(['jquery'], function ($) {
 		$('#go-to-chat').hide();
 	};
 	
-	function Logout(){
+	function Logout(){ // TODO: How can set logout from the server?
 		sessionStorage.setItem('username', '');
 		sessionStorage.setItem('userHash', '');
 		requirejs(['../template-loader'], function (templateLoader) {
