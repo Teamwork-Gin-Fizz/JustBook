@@ -1,4 +1,5 @@
 define(['jquery', '../scripts/constants'], function ($, constants) {
+    console.log('I am in chat-logic.js');
 	var username = sessionStorage.getItem('username'),
 		userhash = sessionStorage.getItem('userHash'),
 		$template = $('#template'),
@@ -58,14 +59,15 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 	});
 
 	function refreshChatBox() {
+        console.log('I am in the refreshChatBox()');
 		var theHtml = '';
 		$.getJSON(constants.serverAddress + '?callback=?',
 			'action=' + 'get' +
 			'&to=' + correspondent +
 			'&hash=' + userhash,
-			function (res) {
+			function response(res) { //TODO: added name of the function, to make it testable
                 if(res.answer == 'incorrect'){ // TODO: Answer to be incorrect is the common case
-                    console.log('refreshChatBox() returns res.answer "incorrect"'); //TODO: We can remove this logger to not log anything in the console
+                    return ('refreshChatBox() returns res.answer "incorrect"');
                 }else{
                     var allData = res.messages.split(".//-||/.");
                     $.each(allData, function (index, value) {
@@ -87,7 +89,7 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
             $chatZone.scrollTop($chatZone[0].scrollHeight);
         }
         else{
-            console.log('refreshScroll() returns this message because chatZone does not contain anything! Type something!');
+            return ('refreshScroll() returns this message because chatZone does not contain anything! Type something!');
         }
 	}
 
