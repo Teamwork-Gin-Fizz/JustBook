@@ -1,4 +1,4 @@
-define(['jquery', '../scripts/constants'], function ($, constants) {
+define(['jquery', '../scripts/constants', '../scripts/emoticons-parser'], function ($, constants, parser) {
     console.log('I am in chat-logic.js');
 	var username = sessionStorage.getItem('username'),
 		userhash = sessionStorage.getItem('userHash'),
@@ -38,10 +38,13 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 		console.log('kakto trea e');
 		var $msgCommentBox = $('#msg');
         var $message = $msgCommentBox.val();
-        if ($message != '') {
+
+		var parsedMessage = parser.parseMessage($message);
+
+        if (parsedMessage != '') {
 			$.getJSON(constants.serverAddress + '?callback=?',
 				'action=' + 'add' +
-				'&message=' + $message +
+				'&message=' + parsedMessage +
 				'&to=' + correspondent +
 				'&hash=' + userhash);
         }
