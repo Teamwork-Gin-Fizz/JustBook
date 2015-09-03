@@ -14,7 +14,7 @@ require(['jquery', 'user/scripts/constants'], function ($, constants) {
 
         function first(){
             require(['user/scripts/template-loader'], function (templateLoader) {
-                templateLoader.loadCustomPage('templates/main-page-home.html', second);
+                templateLoader.loadCustomPage('templates/user-home.handlebars', second);
             });
         }
 

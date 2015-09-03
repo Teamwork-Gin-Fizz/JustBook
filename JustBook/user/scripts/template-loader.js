@@ -13,11 +13,8 @@ define(['jquery'], function($){
         $template.load('templates/main-page-sign-up.handlebars');
     }
 
-    function loadCustomPage(path, callback){
+    function loadCustomPage(path){
         $template.load(path);
-        if (typeof callback === 'function'){
-            callback();
-        }
     }
 
     return {

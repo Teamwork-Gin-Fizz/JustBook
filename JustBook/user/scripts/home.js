@@ -14,7 +14,7 @@ require(['jquery'], function ($) {
 		});
 		require(['user/scripts/chat-logic']);
 		$('#go-to-chat').hide();
-	};
+	}
 	
 	function Logout(){ // TODO: How can set logout from the server?
 		sessionStorage.setItem('username', '');
@@ -22,5 +22,5 @@ require(['jquery'], function ($) {
 		require(['user/scripts/template-loader'], function (templateLoader) {
             templateLoader.loadCustomPage('templates/main-page.handlebars');
         });
-	};
+	}
 });
