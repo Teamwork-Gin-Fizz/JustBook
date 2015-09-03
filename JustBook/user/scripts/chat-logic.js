@@ -71,15 +71,15 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
                     return ('refreshChatBox() returns res.answer "incorrect"');
                 }else{
                     var allData = res.messages.split(".//-||/.");
-
-					if (allData.length > counter && username !== correspondent) {
+					console.log(allData);
+					if (allData.length > counter) {
 						$("audio").trigger('play');
 						counter = allData.length;
 					}
 
                     $.each(allData, function (index, value) {
                         if (value !== '') {
-                            theHtml += "<div class='col-md-12'>";
+                            theHtml += "<div class='col-md-12' id='message-pop-up'>";
                             theHtml += value;
                             theHtml += '</div>';
                         }
