@@ -1,0 +1,8 @@
+.invalid-data {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-top-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    color: white !important;
+    background-color: #ff0121;
+}

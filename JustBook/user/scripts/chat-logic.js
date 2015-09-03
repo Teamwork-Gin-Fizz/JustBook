@@ -3,7 +3,8 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
 	var username = sessionStorage.getItem('username'),
 		userhash = sessionStorage.getItem('userHash'),
 		$template = $('#template'),
-		correspondent;
+		correspondent,
+		counter = 0;
 
 	$.getJSON(constants.serverAddress +
 		'?callback=?', 'action=' + 'chatUsers',
@@ -70,6 +71,12 @@ define(['jquery', '../scripts/constants'], function ($, constants) {
                     return ('refreshChatBox() returns res.answer "incorrect"');
                 }else{
                     var allData = res.messages.split(".//-||/.");
+
+					if (allData.length > counter && username !== correspondent) {
+						$("audio").trigger('play');
+						counter = allData.length;
+					}
+
                     $.each(allData, function (index, value) {
                         if (value !== '') {
                             theHtml += "<div class='col-md-12'>";
