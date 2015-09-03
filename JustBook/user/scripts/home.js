@@ -20,7 +20,7 @@ require(['jquery'], function ($) {
 		sessionStorage.setItem('username', '');
 		sessionStorage.setItem('userHash', '');
 		require(['user/scripts/template-loader'], function (templateLoader) {
-            templateLoader.loadCustomPage('templates/main-page-template.html');
+            templateLoader.loadCustomPage('templates/main-page.handlebars');
         });
 	};
 });

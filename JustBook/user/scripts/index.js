@@ -6,20 +6,27 @@
 
     // Sammy depends on jQuery.
     // Sammy does not return a function object with SystemJS, but it does creates a global function object.
-    System.import('jquery').then(function () {
+    System.import('jquery').then(function ($) {
         System.import('sammy').then(function () {
-            System.import('user/scripts/inner-template-loader').then(function (templateLoader) {
-                var app = window.Sammy('#template', function () {  //TODO: What '#template' does really do?
+            System.import('user/scripts/templates').then(function (templates) {
+                var $template = $('#template'),
+                    app = Sammy('#template', function () {  //TODO: What '#template' does really do?
                     this.get('#/', function () {
-                        templateLoader.loadTemplate('#template', 'templates/main-page-template.html');
+                        templates.get('main-page').then(function (template) {
+                            $template.html(template());
+                        });
                     });
 
                     this.get('#/sign-in', function () {
-                        templateLoader.loadTemplate('#template', 'templates/main-page-signin-template.html');
+                        templates.get('main-page-sign-in').then(function (template) {
+                            $template.html(template());
+                        });
                     });
 
                     this.get('#/sign-up', function () {
-                        templateLoader.loadTemplate('#template', 'templates/main-page-signup-template.html');
+                        templates.get('main-page-sign-up').then(function (template) {
+                            $template.html(template());
+                        })
                     });
 
                     this.get('#/home', function () {
