@@ -94,6 +94,7 @@ define(['jquery', '../scripts/constants', '../scripts/emoticons-parser'], functi
 	setInterval(refreshChatBox, 1000);
 
 	function refreshScroll(){
+		
         var $chatZone = $('#chatZone');
         if($chatZone.length != 0){
             $chatZone.scrollTop($chatZone[0].scrollHeight);
@@ -101,9 +102,7 @@ define(['jquery', '../scripts/constants', '../scripts/emoticons-parser'], functi
         else{
             return ('refreshScroll() returns this message because chatZone does not contain anything! Type something!');
         }
-	}
-
-	if($('#chatZone')){
-	    setInterval(refreshScroll, 3000);
-	}
+	};
+	
+	setTimeout(refreshScroll,3000);
 });
