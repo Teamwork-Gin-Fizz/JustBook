@@ -78,7 +78,7 @@
         if($data->count()){
             $userFromSessions = $data->first();
             $receiverInfo = $db->get('users', array('username', '=', $receiver));
-            $messageQuery = $db->query("SELECT * FROM chat_messages WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?)", 
+            $messageQuery = $db->query("SELECT * FROM (SELECT * FROM chat_messages WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?)  order by id desc limit 40) tmp order by tmp.id asc", 
                 array($userFromSessions->user_id,$receiverInfo->first()->id,$receiverInfo->first()->id, $userFromSessions->user_id));
             if($messageQuery->count())
             {
