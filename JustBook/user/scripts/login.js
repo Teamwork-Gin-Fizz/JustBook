@@ -46,10 +46,22 @@ require(['jquery', 'user/scripts/constants'], function ($, constants) {
                 }
                 else{
                     if(res.reason == 'username'){ //TODO: need some good styling :)
-                        $('#error-message').html('Incorrect username!').css('text-align', 'center').css('font-weight', 'bold').css('color', 'red').fadeOut(3000);
+                        $('#error-message')
+                            .html('Incorrect username!')
+                            .css('text-align', 'center')
+                            .css('font-weight', 'bold')
+                            .css('color', 'red')
+                            .addClass('invalid-data')
+                            .fadeOut(3000);
                     }
                     if(res.reason == 'password'){ //TODO: need some good styling :)
-                        $('#error-message').html('Incorrect password!').css('text-align', 'center').css('font-weight', 'bold').css('color', 'red').fadeOut(3000);
+                        $('#error-message')
+                            .html('Incorrect password!')
+                            .css('text-align', 'center')
+                            .css('font-weight', 'bold')
+                            .css('color', 'red')
+                            .addClass('invalid-data')
+                            .fadeOut(3000);
                     }
                 }
             });
