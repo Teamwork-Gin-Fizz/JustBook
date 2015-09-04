@@ -84,19 +84,29 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
                     if(res.messages === undefined){
                         res.messages = '[{}]';
                     }
-                    
+
                     var counter = 1;
                     var allData = res.messages.split(".//-||/.");
                     if (allData.length > counter) {
                         $("audio").trigger('play');
                         counter = allData.length;
                     }
-                    resolve(JSON.parse(res.messages));
 
-                });
+                    resolve(JSON.parse(res.messages));
+                }
+            );
         });
 
         return promise;
+    }
+
+    function sendMessageChat(parsedMessage, correspondent, userHash){
+        $.getJSON(constants.serverAddress + '?callback=?',
+            'action=' + 'add' +
+            '&message=' + parsedMessage +
+            '&to=' + correspondent +
+            '&hash=' + userHash);
+        console.log('nd');
     }
 
     return {
@@ -107,7 +117,8 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
 
         chat: {
             getAllUsernames: getAllUsernamesChat,
-            getAllMessages: getAllMessagesChat
+            getAllMessages: getAllMessagesChat,
+            sendMessage: sendMessageChat
         }
     }
 });

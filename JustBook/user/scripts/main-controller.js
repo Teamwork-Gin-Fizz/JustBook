@@ -114,14 +114,48 @@ define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/s
             
             this.get('#/home/chat/:name', function (context) {
                 templates.get('chat-selected-user').then(function (template) {
-                    data.chat.getAllMessages(sessionStorage.getItem('userHash'), context.params.name).then(function (allMessages) {
-                        var $chatWindow = $('#chat-window');
-                        $chatWindow.html(template(allMessages));
-                    });
+                    //setInterval(function () {
+                    function Load() {
+                        if (window.location.hash == '#/home/chat/' + context.params.name) {
+                            data.chat.getAllMessages(sessionStorage.getItem('userHash'), context.params.name).then(function (allMessages) {
+                                var $chatWindow = $('#chat-window');
+                                $chatWindow.html(template(allMessages));
+
+                                $('#send').on('click', function () {
+                                    console.log('dsadsadas');
+                                    saveChatComment();
+                                });
+
+                                $(document).keypress(function (e) {
+                                    if (e.which == 13) {
+
+                                        console.log('dsadsadas');
+                                        saveChatComment();
+                                    }
+                                });
+                            });
+                        }
+                    }
+
+                    //setInterval(Load, 1000);
+                    Load();
+
+
+                    function saveChatComment() {
+                        var $msgCommentBox = $('#msg');
+                        var $message = $msgCommentBox.val();
+
+                        
+                        if ($message != '') {
+                            data.chat.sendMessage($message, context.params.name, sessionStorage.getItem('userHash'));
+                        }
+
+                        $msgCommentBox.val('');
+                        Load();
+                    }
                 })
             })
         });
-
 
     return app;
 });
