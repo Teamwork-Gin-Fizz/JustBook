@@ -100,7 +100,8 @@ define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/s
                             var $selectedElement = $('#users-for-chat');
                             $selectedElement.on('change', function () {
                                 var correspondent = $selectedElement.val();
-                                if (sessionStorage.getItem('username') === correspondent) {
+                                if (sessionStorage.getItem('username') === correspondent ||
+                                        correspondent === 'Choose:') {
                                     return;
                                 }
 
