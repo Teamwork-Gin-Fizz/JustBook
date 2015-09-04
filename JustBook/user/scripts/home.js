@@ -9,7 +9,7 @@ require(['jquery'], function ($) {
 	$template.on('click', '#go-to-logout', Logout);
 
 	function ChatLoadLogic() {
-		require(['user/scripts/inner-template-loader'], function (templateLoader) {
+		require(['inner-template-loader-dep'], function (templateLoader) {
 			templateLoader.loadTemplate('#inner-content', 'templates/chat-main-page.handlebars');
 		});
 		require(['user/scripts/chat-logic']);
@@ -19,7 +19,7 @@ require(['jquery'], function ($) {
 	function Logout(){ // TODO: How can set logout from the server?
 		sessionStorage.setItem('username', '');
 		sessionStorage.setItem('userHash', '');
-		require(['user/scripts/template-loader'], function (templateLoader) {
+		require(['template-loader-dep'], function (templateLoader) {
             templateLoader.loadCustomPage('templates/main-page.handlebars');
         });
 	}

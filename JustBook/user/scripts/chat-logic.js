@@ -37,7 +37,7 @@ define(['jquery', 'user/scripts/constants'], function ($, constants) {
 	$template.on('change', 'select', function () {
 		correspondent = $("select option:selected").text();
 		//sessionStorage.setItem('correspondent', correspondent);
-		require(['user/scripts/inner-template-loader'], function (templateLoader) {
+		require(['inner-template-loader-dep'], function (templateLoader) {
 			templateLoader.loadTemplate('#chat-window', 'templates/chat-selected-user.html');
 		});
 	});

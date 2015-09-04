@@ -1,4 +1,4 @@
-define('controller', ['user/scripts/templates', 'user/scripts/data', 'user/scripts/validator'], function (templates, data, validator) {
+define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/scripts/validator'], function (templates, data, validator) {
     var $template = $('#template'),
         app = Sammy('#template', function () {
             this.get('#/', function () {
@@ -90,7 +90,7 @@ define('controller', ['user/scripts/templates', 'user/scripts/data', 'user/scrip
                     templates.get('chat-main-page').then(function (template) {
                         var $innerContent = $('#inner-content');
                         $innerContent.html(template());
-                        
+
                     });
                 }
             });

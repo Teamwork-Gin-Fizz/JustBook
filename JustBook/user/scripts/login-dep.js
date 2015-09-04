@@ -7,13 +7,13 @@ require(['jquery', 'user/scripts/constants'], function ($, constants) {
     if (typeof(sessionStorage.getItem('userHash')) ==='string' && sessionStorage.getItem('userHash') != '') {
         LoadMain();
     }else{
-        console.log('IF statement of sessionStorage item validation in login.js is not satisfied'); //TODO: Want to see if this is possible!
+        console.log('IF statement of sessionStorage item validation in login-dep.js is not satisfied'); //TODO: Want to see if this is possible!
     }
 
     function LoadMain() {
 
         function first(){
-            require(['user/scripts/template-loader'], function (templateLoader) {
+            require(['template-loader-dep'], function (templateLoader) {
                 templateLoader.loadCustomPage('templates/user-home.handlebars', second);
             });
         }

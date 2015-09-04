@@ -24,11 +24,11 @@ require(['jquery', 'user/scripts/constants'], function ($, constants) {
                 '&birthdate=' + birthDate,
                 function (res) {
                     if (res.answer === 'correct') {
-                        require(['user/scripts/inner-template-loader'], function (templateLoader) {
+                        require(['inner-template-loader-dep'], function (templateLoader) {
                             templateLoader.loadTemplate('#inner-window', 'templates/signup-page-result-success.html');
                         });
                     } else {
-                        require(['user/scripts/inner-template-loader'], function (templateLoader) {
+                        require(['inner-template-loader-dep'], function (templateLoader) {
                             templateLoader.loadTemplate('#inner-window', 'templates/signup-page-result-fail.html');
                         });
                     }

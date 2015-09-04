@@ -1,6 +1,6 @@
 window.define = System.amdDefine;
 window.require = System.amdRequire;
 
-require(['user/scripts/index'], function (controller) {
-    controller.run('#/');
+require(['user/scripts/main-controller'], function (mainController) {
+    mainController.run('#/');
 });
