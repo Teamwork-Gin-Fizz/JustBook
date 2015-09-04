@@ -40,7 +40,6 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
                 '&gender=' + user.gender +
                 '&birthdate=' + user.birthDate,
                 function (res) {
-                    console.log(res);
                     if (res.answer === 'correct') {
                         sessionStorage.setItem('userHash', res.hash);
                         //TODO: change to res.username when server is updated
@@ -63,7 +62,6 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
                 function (res) {
                     if (res.answer === 'correct') {
                         var stringified = JSON.parse(res.list);
-                        console.log(stringified);
                         resolve(stringified);
                     } else {
                         reject(res.answer);
@@ -83,19 +81,18 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
                 '&to=' + correspondent +
                 '&hash=' + userHash,
                 function response(res) { //TODO: added name of the function, to make it testable
-                    if (res.answer == 'incorrect') { // TODO: Answer to be incorrect is the common case
-                        reject('refreshChatBox() returns res.answer "incorrect"');
-                    } else {
-                        var counter = 1;
-                        var allData = res.messages.split(".//-||/.");
-                        console.log(allData);
-                        if (allData.length > counter) {
-                            $("audio").trigger('play');
-                            counter = allData.length;
-                        }
-
-                        resolve(JSON.parse(res.messages));
+                    if(res.messages === undefined){
+                        res.messages = '[{}]';
                     }
+                    
+                    var counter = 1;
+                    var allData = res.messages.split(".//-||/.");
+                    if (allData.length > counter) {
+                        $("audio").trigger('play');
+                        counter = allData.length;
+                    }
+                    resolve(JSON.parse(res.messages));
+
                 });
         });
 
