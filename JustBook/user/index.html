@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>JustBook</title>
     <link rel="stylesheet" type="text/css" href="jspm_packages/github/twbs/bootstrap@3.3.5/css/bootstrap.css">
@@ -13,7 +14,18 @@
     <link rel="stylesheet" type="text/css" href="styles/css/error-message.css">
     <!--<script src="scripts/libs/require.js" data-main="scripts/index"></script>-->
 </head>
+
 <body>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v2.4&appId=125575695921";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+    </script>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -29,9 +41,12 @@
             </div>
         </div>
         <div id="template"></div>
-       <div id="footer-container" class="navbar navbar-inner  navbar-fixed-bottom">
-           <div id="footer">&copy; All rights reserved</div>
-       </div>
+        
+        <div id="footer-container" class="navbar navbar-inner  navbar-fixed-bottom">
+            <div id="footer">&copy; All rights reserved 
+                <div class="fb-share-button" data-href="https://www.facebook.com/TelerikAcademy?ref=ts&amp;fref=ts" data-layout="button_count"></div>
+            </div>
+        </div>
     </div>
     <script src="jspm_packages/github/components/jquery@2.1.4/jquery.js"></script>
     <script src="jspm_packages/npm/sammy@0.7.6/lib/sammy.js"></script>
@@ -44,4 +59,5 @@
         <source src="../server/media/audio/Facebook - Chat.mp3" type="audio/mp3">
     </audio>
 </body>
+
 </html>
