@@ -1,3 +1,4 @@
+console.log('config.js loaded');
 System.config({
   baseURL: "../",
   defaultJSExtensions: true,

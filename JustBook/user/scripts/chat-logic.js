@@ -1,6 +1,13 @@
-//TODO: when merging use 'user/scripts/constants'
-define(['jquery', '../scripts/constants', '../scripts/emoticons-parser'], function ($, constants, parser) {
+window.require = System.amdRequire;
+window.define = System.amdDefine;
+
+define(['jquery', 'user/scripts/constants'], function ($, constants) {
     console.log('I am in chat-logic.js');
+
+    function sum(number1, number2){
+        return number1 + number2;
+    }
+
 	var username = sessionStorage.getItem('username'),
 		userhash = sessionStorage.getItem('userHash'),
 		$template = $('#template'),
@@ -71,6 +78,7 @@ define(['jquery', '../scripts/constants', '../scripts/emoticons-parser'], functi
 			'&to=' + correspondent +
 			'&hash=' + userhash,
 			function response(res) { //TODO: added name of the function, to make it testable
+                console.log('I am in response()');
                 if(res.answer == 'incorrect'){ // TODO: Answer to be incorrect is the common case
                     return ('refreshChatBox() returns res.answer "incorrect"');
                 }else{
@@ -106,4 +114,8 @@ define(['jquery', '../scripts/constants', '../scripts/emoticons-parser'], functi
 	};
 	
 	setTimeout(refreshScroll,3000);
+
+    return {
+        sum: sum
+    }
 });
