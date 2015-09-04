@@ -56,7 +56,7 @@ require(['user/scripts/chat-logic'], function (chatLogic) {
 
     describe('Proba SUM', function () {
         it('testvam sum', function () {
-            console.log(func);
+            console.log('I am in the describe of the tests');
             var actual = sum(2,3);
             var expected = 5;
             expect(actual).to.equal(expected);

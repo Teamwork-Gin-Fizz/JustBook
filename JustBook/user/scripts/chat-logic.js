@@ -11,7 +11,8 @@ define(['jquery', 'user/scripts/constants'], function ($, constants) {
 	var username = sessionStorage.getItem('username'),
 		userhash = sessionStorage.getItem('userHash'),
 		$template = $('#template'),
-		correspondent;
+		correspondent,
+		counter = 0;
 
 	$.getJSON(constants.serverAddress +
 		'?callback=?', 'action=' + 'chatUsers',
@@ -45,10 +46,13 @@ define(['jquery', 'user/scripts/constants'], function ($, constants) {
 		console.log('kakto trea e');
 		var $msgCommentBox = $('#msg');
         var $message = $msgCommentBox.val();
-        if ($message != '') {
+
+		var parsedMessage = parser.parseMessage($message);
+
+        if (parsedMessage != '') {
 			$.getJSON(constants.serverAddress + '?callback=?',
 				'action=' + 'add' +
-				'&message=' + $message +
+				'&message=' + parsedMessage +
 				'&to=' + correspondent +
 				'&hash=' + userhash);
         }
@@ -79,9 +83,15 @@ define(['jquery', 'user/scripts/constants'], function ($, constants) {
                     return ('refreshChatBox() returns res.answer "incorrect"');
                 }else{
                     var allData = res.messages.split(".//-||/.");
+					console.log(allData);
+					if (allData.length > counter) {
+						$("audio").trigger('play');
+						counter = allData.length;
+					}
+
                     $.each(allData, function (index, value) {
                         if (value !== '') {
-                            theHtml += "<div class='col-md-12'>";
+                            theHtml += "<div class='col-md-12' id='message-pop-up'>";
                             theHtml += value;
                             theHtml += '</div>';
                         }
@@ -93,6 +103,7 @@ define(['jquery', 'user/scripts/constants'], function ($, constants) {
 	setInterval(refreshChatBox, 1000);
 
 	function refreshScroll(){
+		
         var $chatZone = $('#chatZone');
         if($chatZone.length != 0){
             $chatZone.scrollTop($chatZone[0].scrollHeight);
@@ -100,11 +111,9 @@ define(['jquery', 'user/scripts/constants'], function ($, constants) {
         else{
             return ('refreshScroll() returns this message because chatZone does not contain anything! Type something!');
         }
-	}
-
-	if($('#chatZone')){
-	    setInterval(refreshScroll, 3000);
-	}
+	};
+	
+	setTimeout(refreshScroll,3000);
 
     return {
         sum: sum
