@@ -1,16 +1,22 @@
 <div class="chat">
-	<div class='row'>
-		<div class="col-md-12">
-			<div id="chatZone" class='bg-info' style="height:300px; overflow-y: scroll" name="chatZone">
-			</div>
-		</div>
-		<br />
-		<br />
-		<div class="col-md-12">
-			<div class="form-group">
-				<input class="form-control" id='msg' autofocus='true' rows="3" />
-			</div>
-		</div>
-	</div>
-	<button class="btn btn-primary btn-block" id="send">Send message</button>
+    <div class='row'>
+        <div class="col-md-12">
+            <div id="chatZone" class='bg-info' style="height:300px; overflow-y: scroll" name="chatZone">
+                {{#each this}}
+                    <div id="message-pop-up" class="col-md-12">
+                        <div class="{{class}}">{{post}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <br/>
+        <br/>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <input class="form-control" id='msg' autofocus='true' rows="3"/>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-block" id="send">Send message</button>
 </div>

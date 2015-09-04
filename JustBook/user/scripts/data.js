@@ -56,13 +56,13 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
         return promise;
     }
 
-    function getAllUsernames() {
+    function getAllUsernamesChat() {
         var promise = new Promise(function (resolve, reject) {
             $.getJSON(constants.serverAddress + '?callback=?',
                 'action=chatUsers',
                 function (res) {
                     if (res.answer === 'correct') {
-                        var stringified =JSON.parse(res.list);
+                        var stringified = JSON.parse(res.list);
                         console.log(stringified);
                         resolve(stringified);
                     } else {
@@ -75,6 +75,33 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
         return promise;
     }
 
+    function getAllMessagesChat(userHash, correspondent) {
+        var promise = new Promise(function (resolve, reject) {
+
+            $.getJSON(constants.serverAddress + '?callback=?',
+                'action=' + 'get' +
+                '&to=' + correspondent +
+                '&hash=' + userHash,
+                function response(res) { //TODO: added name of the function, to make it testable
+                    if (res.answer == 'incorrect') { // TODO: Answer to be incorrect is the common case
+                        reject('refreshChatBox() returns res.answer "incorrect"');
+                    } else {
+                        var counter = 1;
+                        var allData = res.messages.split(".//-||/.");
+                        console.log(allData);
+                        if (allData.length > counter) {
+                            $("audio").trigger('play');
+                            counter = allData.length;
+                        }
+
+                        resolve(JSON.parse(res.messages));
+                    }
+                });
+        });
+
+        return promise;
+    }
+
     return {
         user: {
             signIn: signInUser,
@@ -82,7 +109,8 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
         },
 
         chat: {
-            getAllUsernames: getAllUsernames
+            getAllUsernames: getAllUsernamesChat,
+            getAllMessages: getAllMessagesChat
         }
     }
 });

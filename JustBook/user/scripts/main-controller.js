@@ -112,10 +112,12 @@ define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/s
                 }
             });
             
-            this.get('#/home/chat/:name', function () {
+            this.get('#/home/chat/:name', function (context) {
                 templates.get('chat-selected-user').then(function (template) {
-                    var $chatWindow = $('#chat-window');
-                    $chatWindow.html(template());
+                    data.chat.getAllMessages(sessionStorage.getItem('userHash'), context.params.name).then(function (allMessages) {
+                        var $chatWindow = $('#chat-window');
+                        $chatWindow.html(template(allMessages));
+                    });
                 })
             })
         });
