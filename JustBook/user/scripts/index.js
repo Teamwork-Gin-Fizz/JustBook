@@ -70,6 +70,11 @@ define('controller', ['user/scripts/templates', 'user/scripts/data', 'user/scrip
                     var username = sessionStorage.getItem('username');
                     $template.html(template({username: username}));
 
+                    var $goToChatButton = $('#go-to-chat-button');
+                    $goToChatButton.on('click', function () {
+                        context.redirect('#/home/chat');
+                    });
+
                     var $signOutButton = $('#sign-out-button');
                     $signOutButton.on('click', function () {
                         sessionStorage.removeItem('username');
@@ -81,7 +86,13 @@ define('controller', ['user/scripts/templates', 'user/scripts/data', 'user/scrip
             });
 
             this.get('#/home/chat', function () {
-
+                if (sessionStorage.getItem('userHash')) {
+                    templates.get('chat-main-page').then(function (template) {
+                        var $innerContent = $('#inner-content');
+                        $innerContent.html(template());
+                        
+                    });
+                }
             });
         });
 

@@ -10,7 +10,7 @@ require(['jquery'], function ($) {
 
 	function ChatLoadLogic() {
 		require(['user/scripts/inner-template-loader'], function (templateLoader) {
-			templateLoader.loadTemplate('#inner-content', 'templates/chat-main-page.html');
+			templateLoader.loadTemplate('#inner-content', 'templates/chat-main-page.handlebars');
 		});
 		require(['user/scripts/chat-logic']);
 		$('#go-to-chat').hide();
