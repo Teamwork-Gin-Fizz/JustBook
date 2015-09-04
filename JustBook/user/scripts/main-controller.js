@@ -1,7 +1,12 @@
 define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/scripts/validator'], function (templates, data, validator) {
     var $template = $('#template'),
         app = Sammy('#template', function () {
-            this.get('#/', function () {
+            this.get('#/', function (context) {
+                if (sessionStorage.getItem('userHash')) {
+                    context.redirect('#/home');
+                    return;
+                }
+
                 templates.get('main-page').then(function (template) {
                     $template.html(template());
                 });
@@ -85,15 +90,33 @@ define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/s
                 });
             });
 
-            this.get('#/home/chat', function () {
+            this.get('#/home/chat', function (context) {
                 if (sessionStorage.getItem('userHash')) {
                     templates.get('chat-main-page').then(function (template) {
-                        var $innerContent = $('#inner-content');
-                        $innerContent.html(template());
+                        data.chat.getAllUsernames().then(function (usernames) {
+                            var $innerContent = $('#inner-content');
+                            $innerContent.html(template(usernames));
 
+                            var $selectedElement = $('#users-for-chat');
+                            $selectedElement.on('change', function () {
+                                var correspondent = $selectedElement.val();
+                                if (sessionStorage.getItem('username') === correspondent) {
+                                    return;
+                                }
+
+                                context.redirect('#/home/chat/' + correspondent);
+                            });
+                        });
                     });
                 }
             });
+            
+            this.get('#/home/chat/:name', function () {
+                templates.get('chat-selected-user').then(function (template) {
+                    var $chatWindow = $('#chat-window');
+                    $chatWindow.html(template());
+                })
+            })
         });
 
 

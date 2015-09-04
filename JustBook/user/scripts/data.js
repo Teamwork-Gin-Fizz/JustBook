@@ -1,16 +1,4 @@
 define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
-    //if (typeof(sessionStorage.getItem('userHash')) === 'string' && sessionStorage.getItem('userHash') != '') {
-    //    LoadMain();
-    //}
-
-    //function LoadMain() {
-    //    require(['user/scripts/template-loader'], function (templateLoader) {
-    //        templateLoader.loadCustomPage('templates/user-home.handlebars');
-    //    });
-    //
-    //    require(['user/scripts/home']);
-    //}
-
     function signInUser(user) {
         var promise = new Promise(function (resolve, reject) {
             $.getJSON(
@@ -41,10 +29,6 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
         return promise;
     }
 
-    //var $template = $('#template');
-    //
-    //$template.on('click', '#register-button', signUpUser);
-
     function signUpUser(user) {
         var promise = new Promise(function (resolve, reject) {
             $.getJSON(constants.serverAddress + '?callback=?',
@@ -58,32 +42,34 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
                 function (res) {
                     console.log(res);
                     if (res.answer === 'correct') {
-                        //require(['user/scripts/inner-template-loader'], function (templateLoader) {
-                        //    templateLoader.loadTemplate('#inner-window', 'templates/signup-page-result-success.html');
-                        //});
                         sessionStorage.setItem('userHash', res.hash);
                         //TODO: change to res.username when server is updated
                         sessionStorage.setItem('username', user.username);
                         resolve(res);
                     } else {
-                        //require(['user/scripts/inner-template-loader'], function (templateLoader) {
-                        //    templateLoader.loadTemplate('#inner-window', 'templates/signup-page-result-fail.html');
-                        //});
                         reject(res);
                     }
-                    //clearForm();
-                    //console.log(res.answer);
                 }
             );
+        });
 
-            //function clearForm() {
-            //    firstName = $('#sign-up-firstname').val(''),
-            //        lastName = $('#sign-up-lastname').val(''),
-            //        birthDate = $('#sign-up-birthdate').val(''),
-            //        gender = $('#sign-up-gender').val(''),
-            //        chosenUsername = $('#sign-up-username').val(''),
-            //        chosenPassword = $('#sign-up-password').val('');
-            //}
+        return promise;
+    }
+
+    function getAllUsernames() {
+        var promise = new Promise(function (resolve, reject) {
+            $.getJSON(constants.serverAddress + '?callback=?',
+                'action=chatUsers',
+                function (res) {
+                    if (res.answer === 'correct') {
+                        var stringified =JSON.parse(res.list);
+                        console.log(stringified);
+                        resolve(stringified);
+                    } else {
+                        reject(res.answer);
+                    }
+                }
+            );
         });
 
         return promise;
@@ -94,5 +80,9 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
             signIn: signInUser,
             signUp: signUpUser
         },
+
+        chat: {
+            getAllUsernames: getAllUsernames
+        }
     }
 });

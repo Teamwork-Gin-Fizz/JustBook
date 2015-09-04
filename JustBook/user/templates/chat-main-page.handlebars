@@ -1,10 +1,15 @@
 <div>
-	<div id='chat-window'>
-		<div class='row'>
-			<div class='col-md-12 text-center'>
-				<p id="choose-user-label">Choose user :</p>
-				<select id='users-for-chat' class='col-md-12 text-center'></select>
-			</div>
-		</div>
-	</div>
+    <div id='chat-window'>
+        <div class='row'>
+            <div class='col-md-12 text-center'>
+                <p id="choose-user-label">Choose user :</p>
+                <select id='users-for-chat' class='col-md-12 text-center'>
+                    <option>Choose:</option>
+                    {{#each this}}
+                        <option value="{{username}}">{{username}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
