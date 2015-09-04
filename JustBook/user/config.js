@@ -1,5 +1,6 @@
+console.log('config.js loaded');
 System.config({
-  baseURL: "../",
+  baseURL: "../../.././/",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {

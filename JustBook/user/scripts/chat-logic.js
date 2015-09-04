@@ -1,5 +1,13 @@
-require(['jquery', 'user/scripts/constants'], function ($, constants) {
+window.require = System.amdRequire;
+window.define = System.amdDefine;
+
+define(['jquery', 'user/scripts/constants'], function ($, constants) {
     console.log('I am in chat-logic.js');
+
+    function sum(number1, number2){
+        return number1 + number2;
+    }
+
 	var username = sessionStorage.getItem('username'),
 		userhash = sessionStorage.getItem('userHash'),
 		$template = $('#template'),
@@ -66,6 +74,7 @@ require(['jquery', 'user/scripts/constants'], function ($, constants) {
 			'&to=' + correspondent +
 			'&hash=' + userhash,
 			function response(res) { //TODO: added name of the function, to make it testable
+                console.log('I am in response()');
                 if(res.answer == 'incorrect'){ // TODO: Answer to be incorrect is the common case
                     return ('refreshChatBox() returns res.answer "incorrect"');
                 }else{
@@ -96,4 +105,8 @@ require(['jquery', 'user/scripts/constants'], function ($, constants) {
 	if($('#chatZone')){
 	    setInterval(refreshScroll, 3000);
 	}
+
+    return {
+        sum: sum
+    }
 });
