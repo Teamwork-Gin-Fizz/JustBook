@@ -113,15 +113,14 @@ define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/s
             });
 
             this.get('#/home/chat/:name', function (context) {
-                var correspondent = context.params.name,
-                    userHash = sessionStorage.getItem('userHash'),
-                    currentHref = location.href;
-
                 templates.get('chat-selected-user').then(function (template) {
                     var $chatWindow = $('#chat-window');
                     $chatWindow.html(template());
                 }).then(function () {
                     var intervalID,
+                        currentHref = location.href,
+                        correspondent = context.params.name,
+                        userHash = sessionStorage.getItem('userHash'),
                         $chatZone = $('#chat-zone'),
                         $message = $('#message'),
                         $sendButton = $('#send-button');

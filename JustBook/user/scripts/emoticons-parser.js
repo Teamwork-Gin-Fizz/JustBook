@@ -2,7 +2,7 @@ define([], function () {
     var parser = (function(){
         function parseMessage(message){
             var parsedMessage = '',
-                laughingEmoticon = '<img src="../server/media/emoticons/laughing.png"/>',
+                laughingEmoticon = '<img src=\\"../server/media/emoticons/laughing.png\\"/>',
                 likeEmoticon = '<img src="../server/media/emoticons/like.png"/>',
                 sadEmoticon = '<img src="../server/media/emoticons/sad.png"/>',
                 smileEmoticon = '<img src="../server/media/emoticons/smile.png"/>',
@@ -54,6 +54,7 @@ define([], function () {
                 }
             }
 
+            console.log(parsedMessage);
             return parsedMessage;
         }
 
