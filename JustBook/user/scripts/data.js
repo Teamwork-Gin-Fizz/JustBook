@@ -77,19 +77,12 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
         var promise = new Promise(function (resolve, reject) {
 
             $.getJSON(constants.serverAddress + '?callback=?',
-                'action=' + 'get' +
+                'action=get' +
                 '&to=' + correspondent +
                 '&hash=' + userHash,
                 function response(res) { //TODO: added name of the function, to make it testable
                     if(res.messages === undefined){
                         res.messages = '[{}]';
-                    }
-
-                    var counter = 1;
-                    var allData = res.messages.split(".//-||/.");
-                    if (allData.length > counter) {
-                        $("audio").trigger('play');
-                        counter = allData.length;
                     }
 
                     resolve(JSON.parse(res.messages));
@@ -105,8 +98,8 @@ define('data', ['jquery', 'user/scripts/constants'], function ($, constants) {
             'action=' + 'add' +
             '&message=' + parsedMessage +
             '&to=' + correspondent +
-            '&hash=' + userHash);
-        console.log('nd');
+            '&hash=' + userHash
+        );
     }
 
     return {

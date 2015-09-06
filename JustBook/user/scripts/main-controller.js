@@ -101,7 +101,7 @@ define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/s
                             $selectedElement.on('change', function () {
                                 var correspondent = $selectedElement.val();
                                 if (sessionStorage.getItem('username') === correspondent ||
-                                        correspondent === 'Choose:') {
+                                    correspondent === 'Choose:') {
                                     return;
                                 }
 
@@ -111,50 +111,57 @@ define('mainController', ['user/scripts/templates', 'user/scripts/data', 'user/s
                     });
                 }
             });
-            
+
             this.get('#/home/chat/:name', function (context) {
+                var correspondent = context.params.name,
+                    userHash = sessionStorage.getItem('userHash'),
+                    currentHref = location.href;
+
                 templates.get('chat-selected-user').then(function (template) {
-                    //setInterval(function () {
-                    function Load() {
-                        if (window.location.hash == '#/home/chat/' + context.params.name) {
-                            data.chat.getAllMessages(sessionStorage.getItem('userHash'), context.params.name).then(function (allMessages) {
-                                var $chatWindow = $('#chat-window');
-                                $chatWindow.html(template(allMessages));
+                    var $chatWindow = $('#chat-window');
+                    $chatWindow.html(template());
+                }).then(function () {
+                    var intervalID,
+                        $chatZone = $('#chat-zone'),
+                        $message = $('#message'),
+                        $sendButton = $('#send-button');
 
-                                $('#send').on('click', function () {
-                                    console.log('dsadsadas');
-                                    saveChatComment();
-                                });
+                    function writeMessages() {
+                        if (location.href !== currentHref) {
+                            clearInterval(intervalID);
+                            return;
+                        }
 
-                                $(document).keypress(function (e) {
-                                    if (e.which == 13) {
+                        templates.get('chat-selected-user-messages').then(function (template) {
+                            data.chat.getAllMessages(userHash, correspondent).then(function (allMessages) {
+                                $chatZone.html(template(allMessages));
 
-                                        console.log('dsadsadas');
-                                        saveChatComment();
-                                    }
-                                });
+                                $chatZone.scrollTop($chatZone.prop('scrollHeight'));
                             });
-                        }
+                        });
                     }
 
-                    //setInterval(Load, 1000);
-                    Load();
+                    intervalID = setInterval(writeMessages, 1000);
 
-
-                    function saveChatComment() {
-                        var $msgCommentBox = $('#msg');
-                        var $message = $msgCommentBox.val();
-
-                        
-                        if ($message != '') {
-                            data.chat.sendMessage($message, context.params.name, sessionStorage.getItem('userHash'));
+                    $message.keydown(function (ev) {
+                        if (ev.which !== 13 || ev.shiftKey) {
+                            return;
                         }
 
-                        $msgCommentBox.val('');
-                        Load();
-                    }
-                })
-            })
+                        if (validator.isEmptyStringOrWhiteSpace($message.val())) {
+                            return;
+                        }
+
+                        data.chat.sendMessage($message.val(), correspondent, userHash);
+                        $message.val('');
+                    });
+
+                    $sendButton.on('click', function () {
+                        var ev = $.Event('keydown', {which: 13});
+                        $message.trigger(ev);
+                    });
+                });
+            });
         });
 
     return app;
